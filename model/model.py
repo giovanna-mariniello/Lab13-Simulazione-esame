@@ -89,11 +89,12 @@ class Model:
             return
 
         for v in vicini:
-            archi_parziale.append((ultimo, v, self._grafo.get_edge_data(ultimo, v)["weight"]))
-            parziale.append(v)
-            self._ricorsione(parziale, archi_parziale)
-            parziale.pop()
-            archi_parziale.pop()
+            if((ultimo, v)) not in archi_parziale:
+                archi_parziale.append((ultimo, v, self._grafo.get_edge_data(ultimo, v)["weight"]))
+                parziale.append(v)
+                self._ricorsione(parziale, archi_parziale)
+                parziale.pop()
+                archi_parziale.pop()
 
     def get_vicini_ammissibili(self, ultimo, archi_parziale):
 
