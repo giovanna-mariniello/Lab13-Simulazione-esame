@@ -63,4 +63,17 @@ class Controller:
 
 
     def handle_path(self, e):
-        pass
+        cammino, archi_cammino, peso = self._model.get_cammino()
+
+        self._view.txtOut2.controls.clear()
+        self._view.txtOut2.controls.append(ft.Text(f"Peso cammino massimo: {peso}"))
+
+        for arco in archi_cammino:
+            n0 = arco[0]
+            n1 = arco[1]
+            peso = self._model.get_peso_arco((n0, n1))
+            distanza = self._model.get_distanza_arco((n0, n1))
+            self._view.txtOut2.controls.append(ft.Text(f"{n0} --> {n1}: peso {peso}, distanza {distanza} "))
+
+
+        self._view.update_page()
